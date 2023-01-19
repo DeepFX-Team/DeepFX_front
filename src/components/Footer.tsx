@@ -5,7 +5,7 @@ function Footer() {
   return (
     <FooterContainer>
       <DeepFXLogo src="img/deepfx_logo.png" />
-      <Credit>Jae Min Song &nbsp; Jung Ha Lee &nbsp; Ji Ho Lee</Credit>
+      <Credit>Jae Min Song &nbsp; Jeong Ha Lee &nbsp; Ji Ho Lee</Credit>
       <Github>
         <img src="img/github.png" style={{ width: "24px" }} />
         &nbsp; &nbsp;Github

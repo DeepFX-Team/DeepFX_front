@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { useInView } from "react-intersection-observer";
+import "../css/main.css";
 
 function Landing() {
+  const scrollToElement = () =>
+    window.scrollTo({ top: 760, behavior: "smooth" });
+
+  const { ref: firstRef, inView: firstVisible } = useInView();
+  const { ref: secondRef, inView: secondVisible } = useInView();
+
+  useEffect(() => {
+    console.log(secondVisible);
+  }, [secondVisible]);
+
   return (
     <Container>
       <Section1>
@@ -17,26 +29,26 @@ function Landing() {
             using stable diffusion machine learning model
           </Section1SubTitle>
         </div>
-        <MoreInfo>
+        <MoreInfo onClick={scrollToElement}>
           <MoreInfoText>More Information</MoreInfoText>
           <MoreInfoPolygon src="img/landing/polygon.png" />
         </MoreInfo>
       </Section1>
 
-      <Section2>
+      <Section2 id="section2" ref={firstRef}>
         <Section2Title>
           If you struggling to find your favorite soundFX for your
         </Section2Title>
         <Section2Images>
-          <div>
+          <div className={firstVisible ? "section2Visible1" : ""}>
             <img src="img/landing/game.png" style={{ width: "340.3px" }} />
             <Section2Names>Game</Section2Names>
           </div>
-          <div>
+          <div className={firstVisible ? "section2Visible2" : ""}>
             <img src="img/landing/video.png" style={{ width: "352.68px" }} />
             <Section2Names>Video</Section2Names>
           </div>
-          <div>
+          <div className={firstVisible ? "section2Visible3" : ""}>
             <img
               src="img/landing/gundam.png"
               style={{ width: "352px", marginTop: "24px" }}
@@ -51,8 +63,8 @@ function Landing() {
       <Section3>
         <div style={{ display: "flex" }}>
           <Section3Desc>
-            You don't have to waste time and stress finding the right SoundFX
-            anymore
+            You don't have to waste time and get stressed finding the right
+            SoundFX anymore
           </Section3Desc>
           <Section3Img src="img/landing/stressed_man.png" />
         </div>
@@ -63,7 +75,8 @@ function Landing() {
           <Section4Img src="img/landing/happy_man.png" />
           <Section4Desc>
             Now you can get the best SoundFX by simply entering the sound you
-            want through DeepFX
+            want through{" "}
+            <span style={{ fontSize: "48px", color: "#0D0C31" }}>DeepFX</span>
           </Section4Desc>
         </div>
       </Section4>
@@ -78,7 +91,7 @@ function Landing() {
             </Section5SubTitle>
           </Section5Half>
           <Section5Half>
-            <Section5Video controls width="250">
+            <Section5Video controls width="250" autoPlay muted loop>
               <source src="vid/sfx_video.webm" type="video/webm"></source>
             </Section5Video>
           </Section5Half>
@@ -101,7 +114,11 @@ function Landing() {
             <Section6Starting>Starting at $29.99/month</Section6Starting>
             <Section6TrialBtn>Try 2 weeks free trial</Section6TrialBtn>
           </div>
-          <Mockup src="img/landing/mockup.png" />
+          <img
+            src="img/landing/mockup.png"
+            className={secondVisible ? "mockUpVisible" : "mockup"}
+            ref={secondRef}
+          />
         </div>
       </Section6>
     </Container>
@@ -117,7 +134,7 @@ const Container = styled.div`
 const Section1 = styled.div`
   padding-top: 69px;
   width: 100vw;
-  height: 693px;
+  height: 760px;
   background: linear-gradient(180deg, #0d0c31 0%, #242180 100%);
 `;
 
@@ -156,7 +173,7 @@ const PolygonAnim = keyframes`
 `;
 
 const MoreInfo = styled.div`
-  margin-top: 605px;
+  margin-top: 615px;
   animation: ${PolygonAnim} 1.5s linear infinite;
 `;
 

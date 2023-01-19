@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "./components/Header.tsx";
-import Landing from "./pages/Landing.tsx";
+import Landing from "./pages/Landing.js";
 import Footer from "./components/Footer.tsx";
 
 function App() {

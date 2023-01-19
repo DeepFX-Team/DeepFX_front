@@ -1,0 +1,67 @@
+body {
+  overflow-x: hidden;
+}
+
+.mockup {
+  width: 661px;
+  height: auto;
+  margin-top: 60px;
+}
+
+.mockUpVisible {
+  width: 661px;
+  height: auto;
+  margin-top: 60px;
+  animation-name: mockupAnim;
+  animation-duration: 3s;
+}
+
+@keyframes mockupAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.section2Visible1 {
+  animation-name: visibleAnim1;
+  animation-duration: 3s;
+}
+@keyframes visibleAnim1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.section2Visible2 {
+  animation-name: visibleAnim2;
+  animation-duration: 4s;
+}
+@keyframes visibleAnim2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.section2Visible3 {
+  animation-name: visibleAnim3;
+  animation-duration: 5s;
+}
+@keyframes visibleAnim3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
