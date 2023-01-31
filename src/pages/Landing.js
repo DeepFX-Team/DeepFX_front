@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { useInView } from "react-intersection-observer";
 import "../css/main.css";
+import Header from "../components/Header.tsx";
 
 function Landing() {
   const scrollToElement = () =>
@@ -15,113 +16,116 @@ function Landing() {
   }, [secondVisible]);
 
   return (
-    <Container>
-      <Section1>
-        <div style={{ position: "absolute" }}>
-          <WaveImg src="img/landing/3d_sound_wave.png"></WaveImg>
-        </div>
-        <div style={{ position: "absolute" }}>
-          <Section1Title>Text to SoundFX</Section1Title>
-        </div>
-        <div style={{ position: "absolute" }}>
-          <Section1SubTitle>
-            DeepFX is a service that converts a entered sentence into SoundFX
-            using stable diffusion machine learning model
-          </Section1SubTitle>
-        </div>
-        <MoreInfo onClick={scrollToElement}>
-          <MoreInfoText>More Information</MoreInfoText>
-          <MoreInfoPolygon src="img/landing/polygon.png" />
-        </MoreInfo>
-      </Section1>
+    <>
+      <Header />
+      <Container>
+        <Section1>
+          <div style={{ position: "absolute" }}>
+            <WaveImg src="img/landing/3d_sound_wave.png"></WaveImg>
+          </div>
+          <div style={{ position: "absolute" }}>
+            <Section1Title>Text to SoundFX</Section1Title>
+          </div>
+          <div style={{ position: "absolute" }}>
+            <Section1SubTitle>
+              DeepFX is a service that converts a entered sentence into SoundFX
+              using stable diffusion machine learning model
+            </Section1SubTitle>
+          </div>
+          <MoreInfo onClick={scrollToElement}>
+            <MoreInfoText>More Information</MoreInfoText>
+            <MoreInfoPolygon src="img/landing/polygon.png" />
+          </MoreInfo>
+        </Section1>
 
-      <Section2 id="section2" ref={firstRef}>
-        <Section2Title>
-          If you struggling to find your favorite soundFX for your
-        </Section2Title>
-        <Section2Images>
-          <div className={firstVisible ? "section2Visible1" : ""}>
-            <img src="img/landing/game.png" style={{ width: "340.3px" }} />
-            <Section2Names>Game</Section2Names>
+        <Section2 id="section2" ref={firstRef}>
+          <Section2Title>
+            If you struggling to find your favorite soundFX for your
+          </Section2Title>
+          <Section2Images>
+            <div className={firstVisible ? "section2Visible1" : ""}>
+              <img src="img/landing/game.png" style={{ width: "340.3px" }} />
+              <Section2Names>Game</Section2Names>
+            </div>
+            <div className={firstVisible ? "section2Visible2" : ""}>
+              <img src="img/landing/video.png" style={{ width: "352.68px" }} />
+              <Section2Names>Video</Section2Names>
+            </div>
+            <div className={firstVisible ? "section2Visible3" : ""}>
+              <img
+                src="img/landing/gundam.png"
+                style={{ width: "352px", marginTop: "24px" }}
+              />
+              <Section2Names style={{ marginTop: "50px" }}>
+                Animation
+              </Section2Names>
+            </div>
+          </Section2Images>
+        </Section2>
+
+        <Section3>
+          <div style={{ display: "flex" }}>
+            <Section3Desc>
+              You don't have to waste time and get stressed finding the right
+              SoundFX anymore
+            </Section3Desc>
+            <Section3Img src="img/landing/stressed_man.png" />
           </div>
-          <div className={firstVisible ? "section2Visible2" : ""}>
-            <img src="img/landing/video.png" style={{ width: "352.68px" }} />
-            <Section2Names>Video</Section2Names>
+        </Section3>
+
+        <Section4>
+          <div style={{ display: "flex" }}>
+            <Section4Img src="img/landing/happy_man.png" />
+            <Section4Desc>
+              Now you can get the best SoundFX by simply entering the sound you
+              want through{" "}
+              <span style={{ fontSize: "48px", color: "#0D0C31" }}>DeepFX</span>
+            </Section4Desc>
           </div>
-          <div className={firstVisible ? "section2Visible3" : ""}>
+        </Section4>
+
+        <Section5>
+          <div style={{ display: "flex" }}>
+            <Section5Half>
+              <Section5Title>How does it possible?</Section5Title>
+              <Section5SubTitle>
+                We learn the sounds of the objects around us in a deep learning
+                model for making new SoundFXs
+              </Section5SubTitle>
+            </Section5Half>
+            <Section5Half>
+              <Section5Video controls width="250" autoPlay muted loop>
+                <source src="vid/sfx_video.webm" type="video/webm"></source>
+              </Section5Video>
+            </Section5Half>
+          </div>
+        </Section5>
+
+        <Section6>
+          <div style={{ display: "flex" }}>
+            <div style={{ marginTop: "180px", marginLeft: "8vw" }}>
+              <Section6Title>
+                <span style={{ fontSize: "42px" }}>Start DeepFX.</span>
+                <br />
+                Everything is provided to make the best SoundFX
+              </Section6Title>
+              <Section6Features>
+                ☑️ Generate SFX from Text &nbsp;&nbsp; ☑️ Select SFX
+                <br />
+                ☑️ Download SFX &nbsp; ☑️ Save SFX in library
+              </Section6Features>
+              <Section6Starting>Starting at $29.99/month</Section6Starting>
+              <Section6TrialBtn>Try 2 weeks free trial</Section6TrialBtn>
+            </div>
             <img
-              src="img/landing/gundam.png"
-              style={{ width: "352px", marginTop: "24px" }}
+              src="img/landing/mockup.png"
+              className={secondVisible ? "mockUpVisible" : "mockup"}
+              ref={secondRef}
             />
-            <Section2Names style={{ marginTop: "50px" }}>
-              Animation
-            </Section2Names>
           </div>
-        </Section2Images>
-      </Section2>
-
-      <Section3>
-        <div style={{ display: "flex" }}>
-          <Section3Desc>
-            You don't have to waste time and get stressed finding the right
-            SoundFX anymore
-          </Section3Desc>
-          <Section3Img src="img/landing/stressed_man.png" />
-        </div>
-      </Section3>
-
-      <Section4>
-        <div style={{ display: "flex" }}>
-          <Section4Img src="img/landing/happy_man.png" />
-          <Section4Desc>
-            Now you can get the best SoundFX by simply entering the sound you
-            want through{" "}
-            <span style={{ fontSize: "48px", color: "#0D0C31" }}>DeepFX</span>
-          </Section4Desc>
-        </div>
-      </Section4>
-
-      <Section5>
-        <div style={{ display: "flex" }}>
-          <Section5Half>
-            <Section5Title>How does it possible?</Section5Title>
-            <Section5SubTitle>
-              We learn the sounds of the objects around us in a deep learning
-              model for making new SoundFXs
-            </Section5SubTitle>
-          </Section5Half>
-          <Section5Half>
-            <Section5Video controls width="250" autoPlay muted loop>
-              <source src="vid/sfx_video.webm" type="video/webm"></source>
-            </Section5Video>
-          </Section5Half>
-        </div>
-      </Section5>
-
-      <Section6>
-        <div style={{ display: "flex" }}>
-          <div style={{ marginTop: "180px", marginLeft: "8vw" }}>
-            <Section6Title>
-              <span style={{ fontSize: "42px" }}>Start DeepFX.</span>
-              <br />
-              Everything is provided to make the best SoundFX
-            </Section6Title>
-            <Section6Features>
-              ☑️ Generate SFX from Text &nbsp;&nbsp; ☑️ Select SFX
-              <br />
-              ☑️ Download SFX &nbsp; ☑️ Save SFX in library
-            </Section6Features>
-            <Section6Starting>Starting at $29.99/month</Section6Starting>
-            <Section6TrialBtn>Try 2 weeks free trial</Section6TrialBtn>
-          </div>
-          <img
-            src="img/landing/mockup.png"
-            className={secondVisible ? "mockUpVisible" : "mockup"}
-            ref={secondRef}
-          />
-        </div>
-      </Section6>
-    </Container>
+        </Section6>
+      </Container>
+    </>
   );
 }
 

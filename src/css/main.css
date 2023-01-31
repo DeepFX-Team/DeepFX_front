@@ -2,6 +2,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+}
+
 .mockup {
   width: 661px;
   height: auto;

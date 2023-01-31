@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <HeaderContainer>
       <LogoImg src="img/deepfx_logo.png" />
       <SignContainer>
-        <SignInText>Sign in</SignInText>
-        <SignUpText>Sign up</SignUpText>
+        <Link to="/signin">
+          <SignInText>Sign in</SignInText>
+        </Link>
+        <Link to="/signup">
+          <SignUpText>Sign up</SignUpText>
+        </Link>
       </SignContainer>
     </HeaderContainer>
   );
@@ -44,6 +49,7 @@ const SignInText = styled.div`
   font-family: "Noto Sans", sans-serif;
   font-weight: 500;
   font-size: 20px;
+  color: white;
 `;
 
 const SignUpText = styled.div`
@@ -55,6 +61,7 @@ const SignUpText = styled.div`
   width: 7vw;
   height: 40px;
   line-height: 40px;
+  color: white;
 `;
 
 export default Header;
