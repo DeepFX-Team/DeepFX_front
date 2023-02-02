@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignedHeader from "../components/SignedHeader.tsx";
 import styled from "styled-components";
 import MyInfo from "../components/MyPage/MyInfo.js";
+import MyRecords from "../components/MyPage/MyRecords.js";
 
 function MyPage() {
   const [currentMenu, setCurrentMenu] = useState(0);
@@ -39,7 +40,7 @@ function MyPage() {
 
         <MyHR />
 
-        {currentMenu === 0 ? <MyInfo></MyInfo> : null}
+        {currentMenu === 0 ? <MyInfo></MyInfo> : <MyRecords></MyRecords>}
       </Container>
     </>
   );
@@ -78,6 +79,7 @@ const MenuSelected = styled.div`
 `;
 
 const MenuUnselected = styled.div`
+  cursor: pointer;
   font-weight: 700;
   font-size: 24px;
   color: #a5a5a5;

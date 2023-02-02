@@ -59,6 +59,7 @@ const LogoutText = styled.div`
   font-size: 20px;
   color: #db0000;
   margin-top: 18px;
+  cursor: pointer;
 `;
 
 export default MenuModal;

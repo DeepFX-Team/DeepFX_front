@@ -38,6 +38,8 @@ function MyInfo() {
         }
       );
 
+      console.log(response);
+
       setUserInfo({
         name: response.data.result.userName,
         group: response.data.result.groupName,

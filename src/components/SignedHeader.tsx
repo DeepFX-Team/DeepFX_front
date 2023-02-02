@@ -62,6 +62,7 @@ const MenuImgContainer = styled.div`
 const MenuImg = styled.img`
   width: 40px;
   height: 40x;
+  cursor: pointer;
 `;
 
 export default SignedHeader;
