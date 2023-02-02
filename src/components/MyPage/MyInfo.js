@@ -52,11 +52,14 @@ function MyInfo() {
 
   return (
     <Container>
-      <MenuTitle>Personal Info</MenuTitle>
+      <FlexDiv>
+        <MenuTitle>Personal Info</MenuTitle>
+        <ModifyBtn>Modify</ModifyBtn>
+      </FlexDiv>
       <InfoContainer>
         {infoList.map((a, i) => {
           return (
-            <div style={{ display: "flex" }}>
+            <FlexDiv>
               <InfoTitle>{a}</InfoTitle>
               {i === 0 ? (
                 <InfoContent>{userInfo.name}</InfoContent>
@@ -65,13 +68,41 @@ function MyInfo() {
               ) : (
                 <InfoContent>{userInfo.email}</InfoContent>
               )}
-            </div>
+            </FlexDiv>
           );
         })}
       </InfoContainer>
-      <MenuTitle>My Membership</MenuTitle>
+      <FlexDiv>
+        <MenuTitle>My Membership</MenuTitle>
+        <ModifyBtn>Change Plan</ModifyBtn>
+      </FlexDiv>
       <PlanContainer>
-        <PlanName>{planInfo.name}</PlanName>
+        <BlockDiv>
+          <PlanName>{planInfo.name}</PlanName>
+          <PlanSpecContainer>
+            {planSpecs.map((a, i) => {
+              return (
+                <BlockDiv>
+                  <PlanSpecName>{a}</PlanSpecName>
+                  <PlanSpecContent>
+                    {i === 0 ? (
+                      <PlanSpecContent>{planInfo.status}</PlanSpecContent>
+                    ) : i === 1 ? (
+                      <PlanSpecContent>${planInfo.price}</PlanSpecContent>
+                    ) : (
+                      <PlanSpecContent>{planInfo.ends}</PlanSpecContent>
+                    )}
+                  </PlanSpecContent>
+                </BlockDiv>
+              );
+            })}
+          </PlanSpecContainer>
+        </BlockDiv>
+        <BlockDiv style={{ marginLeft: "21vw" }}>
+          {planInfo.specs.map((a, i) => {
+            return <PlanDesc>✔ &nbsp;{a}</PlanDesc>;
+          })}
+        </BlockDiv>
       </PlanContainer>
     </Container>
   );
@@ -85,6 +116,14 @@ const Container = styled.div`
 const MenuTitle = styled.div`
   font-weight: 700;
   font-size: 24px;
+`;
+
+const ModifyBtn = styled.div`
+  font-weight: 700;
+  font-size: 15px;
+  color: #a5a5a5;
+  line-height: 40px;
+  margin-left: 30px;
 `;
 
 const InfoContainer = styled.div`
@@ -116,11 +155,44 @@ const PlanContainer = styled.div`
   height: 187px;
   margin-top: 30px;
   padding: 34px 0px 39px 40px;
+  display: flex;
 `;
 
 const PlanName = styled.div`
   font-weight: 700;
   font-size: 32px;
+`;
+
+const PlanSpecContainer = styled.div`
+  display: flex;
+  margin-top: 30px;
+`;
+
+const PlanSpecName = styled.div`
+  font-weight: 700;
+  font-size: 15px;
+  color: #a5a5a5;
+  margin-right: 30px;
+`;
+
+const PlanSpecContent = styled.div`
+  font-weight: 700;
+  font-size: 15px;
+  color: #ffffff;
+`;
+
+const BlockDiv = styled.div`
+  display: block;
+`;
+
+const FlexDiv = styled.div`
+  display: flex;
+`;
+
+const PlanDesc = styled.div`
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 20px;
 `;
 
 export default MyInfo;
