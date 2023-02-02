@@ -1,11 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignIn() {
+  const navigate = useNavigate();
+
   const [item, setItem] = useState(["ID", "Password"]);
   const [ID, setID] = useState("");
   const [PW, setPW] = useState("");
+
+  const signinClicked = async () => {
+    const result = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}api/auth/signin`,
+      {
+        id: ID,
+        password: PW,
+      }
+    );
+
+    console.log(result);
+
+    if (result.data.isSuccess) {
+      const response = result.data.result;
+
+      localStorage.setItem("jwtToken", response.jwtToken);
+      localStorage.setItem("refreshToken", response.refreshToken);
+
+      navigate("/main");
+    } else {
+      alert("invalid user!");
+    }
+  };
 
   return (
     <Container>
@@ -19,15 +45,13 @@ function SignIn() {
                 type={i === 1 ? "password" : "text"}
                 onChange={(e) => {
                   i === 0 ? setID(e.target.value) : setPW(e.target.value);
-                  console.log(ID);
-                  console.log(PW);
                 }}
               ></Input>
             </InputContainer>
           );
         })}
 
-        <SigninBtn>Sign In</SigninBtn>
+        <SigninBtn onClick={signinClicked}>Sign In</SigninBtn>
 
         <Link to="/signup">
           <SignupBtn>sign up</SignupBtn>
