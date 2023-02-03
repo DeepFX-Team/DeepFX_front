@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import WaveSurfer from "wavesurfer.js";
 
+import axios from "axios";
+
 const formWaveSurferOptions = (ref) => ({
   container: ref,
   waveColor: "#eee",
@@ -19,7 +21,7 @@ const formWaveSurferOptions = (ref) => ({
   partialRender: true,
 });
 
-export default function Waveform({ url }) {
+export default function Waveform({ url, fileName }) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [playing, setPlay] = useState(false);
@@ -57,16 +59,27 @@ export default function Waveform({ url }) {
     wavesurfer.current.playPause();
   };
 
-  /*
-  const onVolumeChange = (e) => {
-    const { target } = e;
-    const newVolume = +target.value;
+  const soundDownload = () => {
+    axios({
+      url: url, //your url
+      method: "GET",
+      responseType: "blob", // important
+    }).then((response) => {
+      // create file link in browser's memory
+      const href = URL.createObjectURL(response.data);
 
-    if (newVolume) {
-      setVolume(newVolume);
-      wavesurfer.current.setVolume(newVolume || 1);
-    }
-  };*/
+      // create "a" HTML element with href to file & click
+      const link = document.createElement("a");
+      link.href = href;
+      link.setAttribute("download", fileName + ".mp3"); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+
+      // clean up "a" element & remove ObjectURL
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+    });
+  };
 
   return (
     <WaveContainer>
@@ -81,22 +94,8 @@ export default function Waveform({ url }) {
             {!playing ? "Play" : "Pause"}
           </PauseBtn>
         )}
-        {/*
-        <input
-          type="range"
-          id="volume"
-          name="volume"
-          // waveSurfer recognize value of `0` same as `1`
-          //  so we need to set some zero-ish value for silence
-          min="0.01"
-          max="1"
-          step=".025"
-          onChange={onVolumeChange}
-          defaultValue={volume}
-        />
-        <label htmlFor="volume">Volume</label>*/}
 
-        <SoundIcon src="img/download.png" />
+        <SoundIcon src="img/download.png" onClick={soundDownload} />
         <SoundIcon src="img/trash.png" />
       </Controls>
     </WaveContainer>

@@ -49,7 +49,7 @@ function MyRecords() {
 
   return (
     <Container>
-      <Waveform url={selectedTrack.url} />
+      <Waveform url={selectedTrack.url} fileName={selectedTrack.title} />
       <PlayList
         tracks={soundList}
         selectedTrack={selectedTrack}
