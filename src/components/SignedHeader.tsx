@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MenuModal from "./MenuModal.js";
 
 function SignedHeader() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       <HeaderContainer>
-        <LogoImg src="img/deepfx_logo.png" />
+        <LogoImg
+          src="img/deepfx_logo.png"
+          onClick={() => {
+            navigate("/main");
+          }}
+        />
         <SignContainer>
           <MenuImgContainer>
             <MenuImg
@@ -43,6 +49,7 @@ const LogoImg = styled.img`
   width: auto;
   height: 90%;
   margin-left: 3vw;
+  cursor: pointer;
 `;
 
 const SignContainer = styled.div`

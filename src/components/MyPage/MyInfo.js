@@ -38,15 +38,21 @@ function MyInfo() {
         }
       );
 
-      console.log(response);
+      const result = response.data.result;
 
       setUserInfo({
-        name: response.data.result.userName,
-        group: response.data.result.groupName,
-        email: response.data.result.email,
+        name: result.userName,
+        group: result.groupName,
+        email: result.email,
       });
 
-      console.log(response);
+      setPlanInfo({
+        name: result.planName,
+        status: "Active",
+        price: result.planPrice,
+        ends: result.planEnd,
+        specs: result.planDesc,
+      });
     };
 
     fetchInfo();
