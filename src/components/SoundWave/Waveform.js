@@ -82,9 +82,9 @@ export default function Waveform({ url, fileName, serverIdx, deleteClick }) {
   };
 
   const deleteSound = async () => {
-    deleteClick();
-    const response = axios.patch(
+    const response = await axios.patch(
       `${process.env.REACT_APP_BASE_URL}api/sound/history/${serverIdx}`,
+      {},
       {
         headers: {
           "X-ACCESS-TOKEN": localStorage.getItem("jwtToken"),
@@ -93,6 +93,8 @@ export default function Waveform({ url, fileName, serverIdx, deleteClick }) {
     );
 
     console.log(response);
+
+    deleteClick();
   };
 
   return (

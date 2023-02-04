@@ -16,7 +16,7 @@ function MyRecords() {
     },
   ]);
 
-  const fetchHisory = async () => {
+  const fetchHistory = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_BASE_URL}api/user/history`,
       {
@@ -47,11 +47,11 @@ function MyRecords() {
   };
 
   useEffect(() => {
-    fetchHisory();
+    fetchHistory();
   }, []);
 
   const deleteClick = () => {
-    fetchHisory();
+    fetchHistory();
   };
 
   const [selectedTrack, setSelectedTrack] = useState(soundList[0]);
