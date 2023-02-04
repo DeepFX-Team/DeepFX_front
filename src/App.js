@@ -9,6 +9,7 @@ import Signup from "./pages/Signup.js";
 import ScrollToTop from "./hooks/ScrollToTop.js";
 import Main from "./pages/Main.js";
 import MyPage from "./pages/MyPage.js";
+import Plan from "./pages/Plan";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/main" element={<Main />} />
           <Route path="/my" element={<MyPage />} />
+          <Route path="/plan" element={<Plan />} />
         </Routes>
         <Footer />
       </ScrollToTop>

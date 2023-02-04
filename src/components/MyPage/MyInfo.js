@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function MyInfo() {
   const [infoList, setInfoList] = useState([
@@ -82,7 +83,9 @@ function MyInfo() {
       </InfoContainer>
       <FlexDiv>
         <MenuTitle>My Membership</MenuTitle>
-        <ModifyBtn>Change Plan</ModifyBtn>
+        <Link to="/plan">
+          <ModifyBtn>Change Plan</ModifyBtn>
+        </Link>
       </FlexDiv>
       <PlanContainer>
         <BlockDiv>
