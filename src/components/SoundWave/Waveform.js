@@ -92,9 +92,9 @@ export default function Waveform({ url, fileName, serverIdx, deleteClick }) {
       }
     );
 
-    console.log(response);
-
-    deleteClick();
+    if (response.data.returnCode === 1000) {
+      deleteClick();
+    }
   };
 
   return (

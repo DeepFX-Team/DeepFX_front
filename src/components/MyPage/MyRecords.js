@@ -26,7 +26,7 @@ function MyRecords() {
       }
     );
 
-    console.log(response);
+    //console.log(response);
 
     const result = response.data.result;
 
