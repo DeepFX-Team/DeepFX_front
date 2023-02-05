@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SignedHeader from "../components/SignedHeader.tsx";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Plan() {
+  const navigate = useNavigate();
+
   const [planList, setPlanList] = useState([
     {
       planIdx: 0,
@@ -26,6 +29,23 @@ function Plan() {
     fetchPlan();
   }, []);
 
+  /*플랜 선택하기*/
+  const selectPlan = async (i) => {
+    const response = await axios.patch(
+      `${process.env.REACT_APP_BASE_URL}api/plan/select/${planList[i].planIdx}`,
+      {},
+      {
+        headers: {
+          "X-ACCESS-TOKEN": localStorage.getItem("jwtToken"),
+        },
+      }
+    );
+
+    if (response.data.returnCode === 1000) {
+      navigate("/my");
+    }
+  };
+
   return (
     <>
       <SignedHeader />
@@ -47,7 +67,13 @@ function Plan() {
                 {a.planDesc.map((a, i) => {
                   return <PlanDesc>✔ &nbsp;{a}</PlanDesc>;
                 })}
-                <SelectBtn>Select Plan</SelectBtn>
+                <SelectBtn
+                  onClick={() => {
+                    selectPlan(i);
+                  }}
+                >
+                  Select Plan
+                </SelectBtn>
               </PlanBox>
             );
           })}
