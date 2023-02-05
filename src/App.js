@@ -10,6 +10,7 @@ import ScrollToTop from "./hooks/ScrollToTop.js";
 import Main from "./pages/Main.js";
 import MyPage from "./pages/MyPage.js";
 import Plan from "./pages/Plan";
+import Modify from "./pages/Modify";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/main" element={<Main />} />
           <Route path="/my" element={<MyPage />} />
           <Route path="/plan" element={<Plan />} />
+          <Route path="/modify" element={<Modify />} />
         </Routes>
         <Footer />
       </ScrollToTop>

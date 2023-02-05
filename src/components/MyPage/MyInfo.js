@@ -63,7 +63,9 @@ function MyInfo() {
     <Container>
       <FlexDiv>
         <MenuTitle>Personal Info</MenuTitle>
-        <ModifyBtn>Modify</ModifyBtn>
+        <Link to="/modify">
+          <ModifyBtn>Modify</ModifyBtn>
+        </Link>
       </FlexDiv>
       <InfoContainer>
         {infoList.map((a, i) => {
