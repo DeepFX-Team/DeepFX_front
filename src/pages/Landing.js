@@ -3,25 +3,37 @@ import styled, { keyframes } from "styled-components";
 import { useInView } from "react-intersection-observer";
 import "../css/main.css";
 import Header from "../components/Header.tsx";
+import SignedHeader from "../components/SignedHeader.tsx";
+import Plan from "./Plan";
+import { Link, useNavigate } from "react-router-dom";
+import LandingHeader from "../components/LandingHeader.tsx";
 
 function Landing() {
-  const scrollToElement = () =>
-    window.scrollTo({ top: 760, behavior: "smooth" });
+  const scrollToElement = () => {
+    console.log("test");
+    window.scrollTo({ top: 830, behavior: "smooth" });
+  };
 
   const { ref: firstRef, inView: firstVisible } = useInView();
   const { ref: secondRef, inView: secondVisible } = useInView();
 
+  /*
   useEffect(() => {
     console.log(secondVisible);
-  }, [secondVisible]);
+  }, [secondVisible]);*/
 
   return (
     <>
-      <Header />
+      {localStorage.getItem("jwtToken") === null ? (
+        <Header />
+      ) : (
+        <SignedHeader />
+      )}
+
       <Container>
         <Section1>
-          <div style={{ position: "absolute" }}>
-            <WaveImg src="img/landing/3d_sound_wave.png"></WaveImg>
+          <div style={{ position: "absolute", pointerEvents: "none" }}>
+            <WaveImg src="img/landing/title_guy.png"></WaveImg>
           </div>
           <div style={{ position: "absolute" }}>
             <Section1Title>Text to SoundFX</Section1Title>
@@ -32,6 +44,11 @@ function Landing() {
               using stable diffusion machine learning model
             </Section1SubTitle>
           </div>
+          <Link to="/signin">
+            <div style={{ position: "absolute" }}>
+              <Section1StartBtn>Get Started!</Section1StartBtn>
+            </div>
+          </Link>
           <MoreInfo onClick={scrollToElement}>
             <MoreInfoText>More Information</MoreInfoText>
             <MoreInfoPolygon src="img/landing/polygon.png" />
@@ -102,8 +119,17 @@ function Landing() {
         </Section5>
 
         <Section6>
-          <div style={{ display: "flex" }}>
-            <div style={{ marginTop: "180px", marginLeft: "8vw" }}>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <img
+              src="img/landing/mockup2.png"
+              className={secondVisible ? "mockUpVisible" : "mockup"}
+              ref={secondRef}
+            />
+            <div style={{ marginTop: "155px", marginLeft: "7vw" }}>
               <Section6Title>
                 <span style={{ fontSize: "42px" }}>Start DeepFX.</span>
                 <br />
@@ -114,14 +140,12 @@ function Landing() {
                 <br />
                 ☑️ Download SFX &nbsp; ☑️ Save SFX in library
               </Section6Features>
-              <Section6Starting>Starting at $29.99/month</Section6Starting>
-              <Section6TrialBtn>Try 2 weeks free trial</Section6TrialBtn>
+              <Section6Starting>Starting at $9.99/month</Section6Starting>
+              <Link to="/plan">
+                <PricingLink>➡ See Pricing</PricingLink>
+              </Link>
+              <Section6TrialBtn>Try 1 week free trial</Section6TrialBtn>
             </div>
-            <img
-              src="img/landing/mockup.png"
-              className={secondVisible ? "mockUpVisible" : "mockup"}
-              ref={secondRef}
-            />
           </div>
         </Section6>
       </Container>
@@ -131,7 +155,7 @@ function Landing() {
 
 const Container = styled.div`
   font-family: "Noto Sans", sans-serif;
-  color: white;
+  color: black;
 `;
 
 /*section 1*/
@@ -139,54 +163,70 @@ const Section1 = styled.div`
   padding-top: 69px;
   width: 100vw;
   height: 760px;
-  background: linear-gradient(180deg, #0d0c31 0%, #242180 100%);
+  background: #ececff;
 `;
 
 const WaveImg = styled.img`
-  margin-top: 52px;
-  width: 753px;
+  margin-top: 12px;
+  width: 594px;
   height: auto;
-  margin-left: 44vw;
+  margin-left: 58vw;
 `;
 
 const Section1Title = styled.div`
   font-weight: 800;
   font-size: 55px;
-  margin-top: 268px;
-  margin-left: 11vw;
+  margin-top: 227px;
+  margin-left: 8vw;
 `;
 
 const Section1SubTitle = styled.div`
   font-weight: 700;
   font-size: 30px;
   line-height: 41px;
-  color: #e1e1e1;
-  width: 65vw;
-  margin-top: 366px;
+  color: #363636;
+  width: 45vw;
+  margin-top: 316px;
   text-align: left;
-  margin-left: 11vw;
+  margin-left: 8vw;
+`;
+
+const Section1StartBtn = styled.div`
+  width: 19vw;
+  height: 71px;
+  line-height: 71px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 32px;
+  margin-top: 461px;
+  margin-left: 8vw;
+  color: black;
 `;
 
 const PolygonAnim = keyframes`
     from{
-        margin-top: 605px;
+        margin-top: 630px;
     }
     to{
-        margin-top: 590px;
+        margin-top: 615px;
     }
 `;
 
 const MoreInfo = styled.div`
-  margin-top: 615px;
+  cursor: pointer;
+  margin-top: 600px;
   animation: ${PolygonAnim} 1.5s linear infinite;
 `;
 
 const MoreInfoText = styled.div`
+  cursor: pointer;
   font-weight: 700;
   font-size: 24px;
 `;
 
 const MoreInfoPolygon = styled.img`
+  cursor: pointer;
   margin-top: 5px;
   width: 20px;
   height: auto;
@@ -306,18 +346,19 @@ const Section5Video = styled.video`
   height: 760px;
 `;
 const Section5Title = styled.div`
-  margin-top: 207px;
-  font-weight: 600;
-  font-size: 48px;
+  margin-top: 195px;
+  font-weight: 800;
+  font-size: 50px;
   color: #8d83ff;
 `;
 const Section5SubTitle = styled.div`
-  font-weight: 500;
-  font-size: 40px;
-  line-height: 54px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 49px;
   width: 36vw;
   margin-left: 7vw;
-  margin-top: 30px;
+  margin-top: 88px;
+  color: white;
 `;
 /* */
 
@@ -325,7 +366,8 @@ const Section5SubTitle = styled.div`
 const Section6 = styled.div`
   width: 100vw;
   height: 760px;
-  background: linear-gradient(180deg, #0d0c31 0%, #242180 100%);
+  background: #f2f4fa;
+  color: black;
 `;
 const Section6Title = styled.div`
   font-weight: 800;
@@ -348,19 +390,25 @@ const Section6Starting = styled.div`
   font-weight: 800;
   font-size: 32px;
   line-height: 44px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(0, 0, 0, 0.6);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: left;
+`;
+const PricingLink = styled.div`
+  font-weight: 600;
+  font-size: 20px;
+  color: #6987a2;
   text-align: left;
 `;
 const Section6TrialBtn = styled.div`
   width: 29vw;
   height: 71px;
   line-height: 71px;
-  border: 2px solid #ffffff;
+  border: 2px solid black;
   border-radius: 10px;
   font-weight: 500;
   font-size: 32px;
-  margin-top: 44px;
+  margin-top: 35px;
 `;
 const Mockup = styled.img`
   width: 661px;

@@ -7,8 +7,10 @@ function Footer() {
       <DeepFXLogo src="img/deepfx_logo.png" />
       <Credit>Jae Min Song &nbsp; Jeong Ha Lee &nbsp; Ji Ho Lee</Credit>
       <Github>
-        <img src="img/github.png" style={{ width: "24px" }} />
-        &nbsp; &nbsp;Github
+        <a href="https://github.com/DeepFX-Team" style={{ color: "white" }}>
+          <img src="img/github.png" style={{ width: "24px" }} />
+          &nbsp; &nbsp;Github
+        </a>
         <span
           style={{
             float: "right",

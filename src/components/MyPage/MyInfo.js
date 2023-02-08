@@ -41,6 +41,8 @@ function MyInfo() {
 
       const result = response.data.result;
 
+      console.log(result);
+
       setUserInfo({
         name: result.userName,
         group: result.groupName,

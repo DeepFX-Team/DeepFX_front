@@ -43,6 +43,7 @@ const Modal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
+  z-index: 999;
 `;
 
 const MyPageText = styled.div`

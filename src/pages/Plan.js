@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SignedHeader from "../components/SignedHeader.tsx";
+import Header from "../components/Header.tsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +28,8 @@ function Plan() {
     };
 
     fetchPlan();
+
+    console.log(localStorage.getItem("jwtToken"));
   }, []);
 
   /*플랜 선택하기*/
@@ -48,34 +51,41 @@ function Plan() {
 
   return (
     <>
-      <SignedHeader />
+      {localStorage.getItem("jwtToken") === null ? (
+        <Header />
+      ) : (
+        <SignedHeader />
+      )}
+
       <Container>
         <Title>Our Membership</Title>
         <PlanContainer>
           {planList.map((a, i) => {
-            return (
-              <PlanBox>
-                <PlanName>{a.planName}</PlanName>
-                <PlanPrice>
-                  ${a.planPrice}
-                  {i === 0 ? (
-                    <span style={{ fontSize: "24px" }}>/month</span>
-                  ) : (
-                    <span style={{ fontSize: "24px" }}>/month~</span>
-                  )}
-                </PlanPrice>
-                {a.planDesc.map((a, i) => {
-                  return <PlanDesc>✔ &nbsp;{a}</PlanDesc>;
-                })}
-                <SelectBtn
-                  onClick={() => {
-                    selectPlan(i);
-                  }}
-                >
-                  Select Plan
-                </SelectBtn>
-              </PlanBox>
-            );
+            if (i !== 0) {
+              return (
+                <PlanBox>
+                  <PlanName>{a.planName}</PlanName>
+                  <PlanPrice>
+                    ${a.planPrice}
+                    {i === 0 ? (
+                      <span style={{ fontSize: "24px" }}>/month</span>
+                    ) : (
+                      <span style={{ fontSize: "24px" }}>/month~</span>
+                    )}
+                  </PlanPrice>
+                  {a.planDesc.map((a, i) => {
+                    return <PlanDesc>✔ &nbsp;{a}</PlanDesc>;
+                  })}
+                  <SelectBtn
+                    onClick={() => {
+                      selectPlan(i);
+                    }}
+                  >
+                    Select Plan
+                  </SelectBtn>
+                </PlanBox>
+              );
+            }
           })}
         </PlanContainer>
       </Container>
