@@ -7,6 +7,8 @@ import Waveform from "../components/SoundWave/Waveform";
 function Main() {
   const [currentText, setCurrentText] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const [sound, setSound] = useState({
     id: 0,
     title: "",
@@ -37,7 +39,23 @@ function Main() {
     const response = await axios.post(
       `http://127.0.0.1:5000/api/predict/`,
       {
-        sentence: text,
+        alpha: 0.75,
+        num_inference_steps: 50,
+        seed_image_id: "og_beat",
+
+        start: {
+          prompt: text,
+          seed: 42,
+          denoising: 0.75,
+          guidance: 7.0,
+        },
+
+        end: {
+          prompt: text,
+          seed: 123,
+          denoising: 0.75,
+          guidance: 7.0,
+        },
       },
       {
         headers: {
