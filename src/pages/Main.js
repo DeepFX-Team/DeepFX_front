@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SignedHeader from "../components/SignedHeader.tsx";
 import styled from "styled-components";
 import axios from "axios";
@@ -13,29 +13,11 @@ function Main() {
     id: 0,
     title: "",
     url: "https://api.twilio.com//2010-04-01/Accounts/AC25aa00521bfac6d667f13fec086072df/Recordings/RE6d44bc34911342ce03d6ad290b66580c.mp3",
-    severIdx: 0,
+    serverIdx: 0,
   });
 
-  /*
-  const getSoundUrl = async (data) => {
-    const formData = new FormData();
-
-    formData.append("file", data);
-
-    const response = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}api/sound/upload`,
-      formData,
-      {
-        headers: {
-          "X-ACCESS-TOKEN": localStorage.getItem("jwtToken"),
-        },
-      }
-    );
-
-    console.log(response);
-  };*/
-
   const getResult = async (text) => {
+    setLoading(true);
     const response = await axios.post(
       `http://127.0.0.1:5000/api/predict/`,
       {
@@ -64,13 +46,15 @@ function Main() {
       }
     );
 
-    console.log(response.data.result.soundUrl);
+    console.log(response.data.result);
+
+    setLoading(false);
 
     setSound({
       id: 0,
       title: text,
       url: response.data.result.soundUrl,
-      severIdx: 0,
+      serverIdx: response.data.result.soundIdx,
     });
   };
 
@@ -85,13 +69,15 @@ function Main() {
           id: 0,
           title: "",
           url: "https://api.twilio.com//2010-04-01/Accounts/AC25aa00521bfac6d667f13fec086072df/Recordings/RE6d44bc34911342ce03d6ad290b66580c.mp3",
-          severIdx: 0,
+          serverIdx: 0,
         });
       }
     }
   };
 
-  const deleteClick = () => {};
+  const saveClick = () => {
+    alert("Saved in your library!");
+  };
 
   return (
     <>
@@ -102,14 +88,30 @@ function Main() {
           onKeyDown={InputEntered}
         />
         <CurrentText>{currentText}</CurrentText>
-
         {sound.title !== "" ? (
-          <Waveform
-            url={sound.url}
-            fileName={sound.title}
-            serverIdx={sound.serverIdx}
-            deleteClick={deleteClick}
-          />
+          <div style={{ marginTop: "50px" }}>
+            <Waveform
+              url={sound.url}
+              fileName={sound.title}
+              serverIdx={sound.serverIdx}
+              deleteClick={saveClick}
+              mode="main"
+            />
+          </div>
+        ) : null}
+        {loading === true ? (
+          <div class="wave-center">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+          </div>
         ) : null}
       </Container>
     </>
@@ -140,7 +142,7 @@ const TextInput = styled.input`
 `;
 
 const CurrentText = styled.div`
-  margin-top: 60px;
+  margin-top: 75px;
   font-weight: 700;
   font-size: 36px;
 `;

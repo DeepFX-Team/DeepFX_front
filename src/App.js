@@ -11,6 +11,7 @@ import Main from "./pages/Main.js";
 import MyPage from "./pages/MyPage.js";
 import Plan from "./pages/Plan";
 import Modify from "./pages/Modify";
+//import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   return (

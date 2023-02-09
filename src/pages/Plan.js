@@ -29,7 +29,7 @@ function Plan() {
 
     fetchPlan();
 
-    console.log(localStorage.getItem("jwtToken"));
+    //console.log(localStorage.getItem("jwtToken"));
   }, []);
 
   /*플랜 선택하기*/

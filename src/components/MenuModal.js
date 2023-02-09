@@ -52,6 +52,7 @@ const MyPageText = styled.div`
   font-size: 20px;
   color: #ffffff;
   margin-top: 23px;
+  text-decoration: none;
 `;
 
 const LogoutText = styled.div`

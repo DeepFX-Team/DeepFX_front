@@ -63,6 +63,7 @@ function MyRecords() {
         fileName={selectedTrack.title}
         serverIdx={selectedTrack.serverIdx}
         deleteClick={deleteClick}
+        mode="history"
       />
       <PlayList
         tracks={soundList}

@@ -21,7 +21,13 @@ const formWaveSurferOptions = (ref) => ({
   partialRender: true,
 });
 
-export default function Waveform({ url, fileName, serverIdx, deleteClick }) {
+export default function Waveform({
+  url,
+  fileName,
+  serverIdx,
+  deleteClick,
+  mode,
+}) {
   const waveformRef = useRef(null);
   const wavesurfer = useRef(null);
   const [playing, setPlay] = useState(false);
@@ -97,6 +103,24 @@ export default function Waveform({ url, fileName, serverIdx, deleteClick }) {
     }
   };
 
+  const saveSound = async () => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}api/sound/history/${serverIdx}`,
+      {},
+      {
+        headers: {
+          "X-ACCESS-TOKEN": localStorage.getItem("jwtToken"),
+        },
+      }
+    );
+
+    console.log(response);
+
+    if (response.data.returnCode === 1000) {
+      deleteClick();
+    }
+  };
+
   return (
     <WaveContainer>
       <div id="waveform" ref={waveformRef} />
@@ -112,7 +136,11 @@ export default function Waveform({ url, fileName, serverIdx, deleteClick }) {
         )}
 
         <SoundIcon src="img/download.png" onClick={soundDownload} />
-        <SoundIcon src="img/trash.png" onClick={deleteSound} />
+        {mode === "main" ? (
+          <SoundIcon src="img/add-library.png" onClick={saveSound} />
+        ) : (
+          <SoundIcon src="img/trash.png" onClick={deleteSound} />
+        )}
       </Controls>
     </WaveContainer>
   );
