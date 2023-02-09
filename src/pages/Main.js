@@ -88,7 +88,7 @@ function Main() {
           onKeyDown={InputEntered}
         />
         <CurrentText>{currentText}</CurrentText>
-        {sound.title !== "" ? (
+        {sound.title !== "" && loading === false ? (
           <div style={{ marginTop: "50px" }}>
             <Waveform
               url={sound.url}
