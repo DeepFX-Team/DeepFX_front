@@ -44,6 +44,8 @@ function MyRecords() {
     });
 
     setSoundList(temp);
+
+    console.log(temp);
   };
 
   useEffect(() => {
@@ -58,18 +60,24 @@ function MyRecords() {
 
   return (
     <Container>
-      <Waveform
-        url={selectedTrack.url}
-        fileName={selectedTrack.title}
-        serverIdx={selectedTrack.serverIdx}
-        deleteClick={deleteClick}
-        mode="history"
-      />
-      <PlayList
-        tracks={soundList}
-        selectedTrack={selectedTrack}
-        setSelectedTrack={setSelectedTrack}
-      />
+      {soundList.length === 0 ? (
+        <NoSound>No soundFX saved in your library</NoSound>
+      ) : (
+        <>
+          <Waveform
+            url={selectedTrack.url}
+            fileName={selectedTrack.title}
+            serverIdx={selectedTrack.serverIdx}
+            deleteClick={deleteClick}
+            mode="history"
+          />
+          <PlayList
+            tracks={soundList}
+            selectedTrack={selectedTrack}
+            setSelectedTrack={setSelectedTrack}
+          />
+        </>
+      )}
     </Container>
   );
 }
@@ -82,6 +90,12 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   max-height: fit-content;
+`;
+
+const NoSound = styled.div`
+  font-weight: 700;
+  font-size: 30px;
+  margin-top: 100px;
 `;
 
 const Wave = styled.div`

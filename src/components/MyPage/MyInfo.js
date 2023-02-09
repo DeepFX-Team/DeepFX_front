@@ -92,32 +92,38 @@ function MyInfo() {
         </Link>
       </FlexDiv>
       <PlanContainer>
-        <BlockDiv>
-          <PlanName>{planInfo.name}</PlanName>
-          <PlanSpecContainer>
-            {planSpecs.map((a, i) => {
-              return (
-                <BlockDiv>
-                  <PlanSpecName>{a}</PlanSpecName>
-                  <PlanSpecContent>
-                    {i === 0 ? (
-                      <PlanSpecContent>{planInfo.status}</PlanSpecContent>
-                    ) : i === 1 ? (
-                      <PlanSpecContent>${planInfo.price}</PlanSpecContent>
-                    ) : (
-                      <PlanSpecContent>{planInfo.ends}</PlanSpecContent>
-                    )}
-                  </PlanSpecContent>
-                </BlockDiv>
-              );
-            })}
-          </PlanSpecContainer>
-        </BlockDiv>
-        <BlockDiv style={{ marginLeft: "21vw" }}>
-          {planInfo.specs.map((a, i) => {
-            return <PlanDesc>✔ &nbsp;{a}</PlanDesc>;
-          })}
-        </BlockDiv>
+        {planInfo.name === "NULL" ? (
+          <NoPlan>No membership</NoPlan>
+        ) : (
+          <>
+            <BlockDiv>
+              <PlanName>{planInfo.name}</PlanName>
+              <PlanSpecContainer>
+                {planSpecs.map((a, i) => {
+                  return (
+                    <BlockDiv>
+                      <PlanSpecName>{a}</PlanSpecName>
+                      <PlanSpecContent>
+                        {i === 0 ? (
+                          <PlanSpecContent>{planInfo.status}</PlanSpecContent>
+                        ) : i === 1 ? (
+                          <PlanSpecContent>${planInfo.price}</PlanSpecContent>
+                        ) : (
+                          <PlanSpecContent>{planInfo.ends}</PlanSpecContent>
+                        )}
+                      </PlanSpecContent>
+                    </BlockDiv>
+                  );
+                })}
+              </PlanSpecContainer>
+            </BlockDiv>
+            <BlockDiv style={{ marginLeft: "21vw" }}>
+              {planInfo.specs.map((a, i) => {
+                return <PlanDesc>✔ &nbsp;{a}</PlanDesc>;
+              })}
+            </BlockDiv>
+          </>
+        )}
       </PlanContainer>
     </Container>
   );
@@ -208,6 +214,17 @@ const PlanDesc = styled.div`
   font-weight: 700;
   font-size: 15px;
   margin-bottom: 20px;
+`;
+
+const NoPlan = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 30px;
+  color: #ffffff;
 `;
 
 export default MyInfo;
